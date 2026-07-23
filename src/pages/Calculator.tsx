@@ -63,7 +63,7 @@ export default function Calculator() {
   return (
     <>
       <PageHero
-        eyebrow="Loan Calculator"
+        eyebrow="Bidii Credit Loan Calculator"
         title="See your full repayment schedule"
         description="Choose a product, set your amount and term, and get a month-by-month breakdown you can download before you apply."
       />

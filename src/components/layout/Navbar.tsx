@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { Link, NavLink } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Sun, Moon } from "lucide-react";
 import { loanProducts } from "../../data/content";
 import { cn } from "../../lib/utils";
 import logo from "../../../public/Bidii_Credit_Logo.png";
+import { useTheme } from "../../lib/useTheme";
 
 const navLinks = [
   { label: "About", to: "/about" },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -115,6 +117,16 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+           <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className={cn(
+              "flex h-9 w-9 items-center justify-center rounded-full transition-colors",
+              scrolled ? "text-ink-700 hover:bg-mist-100" : "text-white/90 hover:bg-white/10"
+            )}
+          >
+            {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
           <Link
             to="/contact"
             className={cn("text-sm font-medium", scrolled ? "text-ink-700" : "text-orange-500/90")}

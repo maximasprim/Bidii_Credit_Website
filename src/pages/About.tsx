@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import PageHero from "../components/ui/PageHero";
 import CTABand from "../components/home/CTABand";
 import { coreValues, timeline, leadership } from "../data/content";
+import { usePageMeta } from "../lib/usePageMeta";
 
 export default function About() {
+  usePageMeta("About Us");
   return (
     <>
       <PageHero

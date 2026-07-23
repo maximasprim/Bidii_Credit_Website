@@ -2,10 +2,12 @@ import { useMemo, useState, lazy, Suspense } from "react";
 import { MapPin, Phone, Clock, Search, Navigation } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { branches } from "../data/content";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const BranchMap = lazy(() => import("../components/ui/BranchMap"));
 
 export default function Branches() {
+  usePageMeta("Branch Locator");
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(

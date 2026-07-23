@@ -7,6 +7,7 @@ import { CheckCircle2, MapPin, Briefcase, Paperclip } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { jobOpenings, benefits } from "../data/content";
 import { cn } from "../lib/utils";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const applicationSchema = z.object({
   fullName: z.string().min(2, "Enter your full name"),
@@ -21,6 +22,7 @@ type ApplicationForm = z.infer<typeof applicationSchema>;
 const departments = ["All", ...Array.from(new Set(jobOpenings.map((j) => j.department)))];
 
 export default function Careers() {
+  usePageMeta("Careers");
   const [department, setDepartment] = useState("All");
   const [submitted, setSubmitted] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);

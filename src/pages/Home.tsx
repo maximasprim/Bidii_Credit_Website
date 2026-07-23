@@ -8,8 +8,10 @@ import Testimonials from "../components/home/Testimonials";
 import BranchesPreview from "../components/home/BranchesPreview";
 import FAQSection from "../components/home/FAQSection";
 import CTABand from "../components/home/CTABand";
+import { usePageMeta } from "../lib/usePageMeta";
 
 export default function Home() {
+  usePageMeta("Financing for Kenyan Businesses That Show Up Every Day");
   return (
     <>
       <Hero />

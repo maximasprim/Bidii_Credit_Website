@@ -5,6 +5,7 @@ import { z } from "zod";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { loanProducts } from "../data/content";
+import {usePageMeta} from "../lib/usePageMeta";
 
 const detailsSchema = z.object({
   fullName: z.string().min(2, "Enter your full name"),
@@ -21,6 +22,7 @@ function formatKes(n: number) {
 }
 
 export default function Apply() {
+  usePageMeta("Apply for a Loan");
   const [step, setStep] = useState(1);
   const [productSlug, setProductSlug] = useState(loanProducts[0].slug);
   const [amount, setAmount] = useState(150000);

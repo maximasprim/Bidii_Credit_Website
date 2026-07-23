@@ -5,6 +5,7 @@ import { Search, ArrowRight, Calendar } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { articles, type NewsCategory } from "../data/content";
 import { cn } from "../lib/utils";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const categories: (NewsCategory | "All")[] = [
   "All",
@@ -21,6 +22,7 @@ function formatDate(iso: string) {
 }
 
 export default function News() {
+  usePageMeta("News & Insights");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<(typeof categories)[number]>("All");
   const [page, setPage] = useState(1);
