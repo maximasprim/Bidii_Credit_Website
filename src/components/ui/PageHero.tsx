@@ -31,9 +31,10 @@ export default function PageHero({
     //     }}
     //   />
     <section
-      className="relative overflow-hidden px-5 py-20 lg:px-8 lg:py-28"
+      className="relative overflow-hidden bg-top bg-no-repeat bg-cover bg-center sm:bg-center px-5 py-20 lg:px-8 lg:py-28"
       style={{
         backgroundImage: `url(${heroBackground})`,
+        // backgroundColor: "var(--color-navy-900)",
       }}
     >
       <div className="absolute inset-0" 

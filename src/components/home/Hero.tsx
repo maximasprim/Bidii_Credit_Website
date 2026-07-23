@@ -14,9 +14,10 @@ export default function Hero() {
     //   }}
     // >
     <section
-      className="relative overflow-hidden bg-cover bg-center pb-24 pt-16 lg:pb-32 lg:pt-20"
+      className="relative overflow-hidden bg-top bg-no-repeat bg-cover bg-center sm:bg-center pb-24 pt-16 lg:pb-32 lg:pt-20"
       style={{
         backgroundImage: `url(${heroBackground})`,
+        // backgroundColor: "var(--color-navy-900)",
       }}
     >
       {/* Dark gradient overlay */}

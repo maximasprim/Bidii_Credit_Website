@@ -1,7 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, lazy, Suspense } from "react";
 import { MapPin, Phone, Clock, Search, Navigation } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { branches } from "../data/content";
+
+const BranchMap = lazy(() => import("../components/ui/BranchMap"));
 
 export default function Branches() {
   const [query, setQuery] = useState("");
@@ -29,9 +31,9 @@ export default function Branches() {
         </div>
       </PageHero>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-          <div className="space-y-4">
+          <div className="space-y-4 lg:h-screen lg:overflow-y-auto lg:border border-gray-200 border-r lg:rounded-2xl">
             {filtered.length === 0 && (
               <p className="rounded-xl border border-mist-200 p-6 text-sm text-ink-500">
                 No branches match "{query}". Try a different town.
@@ -72,7 +74,7 @@ export default function Branches() {
             ))}
           </div>
 
-          <div
+          {/* <div
             className="flex min-h-[420px] flex-col items-center justify-center rounded-3xl border border-mist-200 p-10 text-center"
             style={{ backgroundColor: "var(--color-mist-100)" }}
           >
@@ -81,6 +83,20 @@ export default function Branches() {
               An interactive map connects here once a Google Maps API key is added — each branch
               card's "Directions" link already opens live directions in the meantime.
             </p>
+          </div> */}
+          <div className="overflow-hidden rounded-3xl border border-mist-200" style={{ minHeight: 420 }}>
+            <Suspense
+              fallback={
+                <div
+                  className="flex min-h-[420px] items-center justify-center"
+                  style={{ backgroundColor: "var(--color-mist-100)" }}
+                >
+                  <p className="text-sm text-ink-500">Loading map…</p>
+                </div>
+              }
+            >
+              <BranchMap branches={filtered.length > 0 ? filtered : branches} />
+            </Suspense>
           </div>
         </div>
       </section>
