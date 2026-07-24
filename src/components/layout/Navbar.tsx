@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ChevronDown, Menu, X, Sun, Moon } from "lucide-react";
 import { loanProducts } from "../../data/content";
@@ -36,27 +36,29 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 lg:px-8">
         <Link to="/" className="flex items-center gap-2">
-        <img
-            src={logo}
-            alt="Bidii Credit"
-            className="h-16 w-auto object-contain"
-          />
+         <div className="inline-block rounded-full  dark:bg-white">
+  <img
+    src={logo}
+    alt="Bidii Credit"
+    className="h-16 w-auto object-contain"
+  />
+</div>
           <div className="flex flex-col">
-          <span
-            className={cn(
-              "font-display text-xl font-extrabold tracking-tight transition-colors",
-              scrolled ? "text-navy-900" : "text-navy-900"
-            )}
-            style={{ color: scrolled ? "var(--color-navy-900)" : "var(--color-navy-900)" }}
-          >
-            Bidii<span style={{ color: "var(--color-ember-500)" }}>Credit</span>
-          </span>
-          <p className={cn(
-            "text-xs font-medium transition-colors italic",
-            scrolled ? "text-ink-500" : "text-ink-500"
-          )} style={{ color: scrolled ? "var(--color-ink-500)" : "var(--color-ink-500)" }}>
-            Partners For Growth
-          </p>
+            <span
+              className={cn(
+                "font-display text-xl font-extrabold tracking-tight transition-colors",
+                scrolled ? "text-navy-900" : "text-navy-900"
+              )}
+              style={{ color: scrolled ? "var(--color-navy-900)" : "var(--color-navy-900)" }}
+            >
+              Bidii<span style={{ color: "var(--color-ember-500)" }}>Credit</span>
+            </span>
+            <p className={cn(
+              "text-xs font-medium transition-colors italic",
+              scrolled ? "text-ink-500" : "text-ink-500"
+            )} style={{ color: scrolled ? "var(--color-ink-500)" : "var(--color-ink-500)" }}>
+              Partners For Growth
+            </p>
           </div>
         </Link>
         {/* <Link to="/" className="flex items-center gap-2">
@@ -117,12 +119,12 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-           <button
+          <button
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             className={cn(
               "flex h-9 w-9 items-center justify-center rounded-full transition-colors",
-              scrolled ? "text-ink-700 hover:bg-mist-100" : "text-white/90 hover:bg-white/10"
+              scrolled ? "text-ink-700 hover:bg-mist-100" : "text-orange-200 hover:bg-white/10"
             )}
           >
             {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
@@ -140,6 +142,25 @@ export default function Navbar() {
           >
             Apply Now
           </Link>
+        </div>
+
+        <div className="flex items-center gap-1 lg:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex h-9 w-9 items-center justify-center"
+            style={{ color: scrolled ? "var(--color-ink-900)" : "white" }}
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          {/* <button
+            className="flex h-9 w-9 items-center justify-center"
+            style={{ color: scrolled ? "var(--color-ink-900)" : "white" }}
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button> */}
         </div>
 
         <button

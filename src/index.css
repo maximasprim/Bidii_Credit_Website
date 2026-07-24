@@ -23,8 +23,35 @@
   --color-ink-700: #3D4756;
   --color-ink-500: #647084;
 
+   /* Card/surface background — distinct from page background (--color-mist-50)
+     so dark mode can swap "white cards on a light page" to "raised dark cards
+     on a darker page" by redefining these two independently. */
+  --color-surface: #FFFFFF
+
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark {
+  --color-mist-50: #16233c;   /* default page background */
+  --color-mist-100: #1e2c47;
+  --color-mist-200: #2c3d5a;  /* borders/dividers */
+
+  --color-ink-900: #F3F5F8;
+  --color-ink-700: #C3CBD8;
+  --color-ink-500: #8C97AA;
+
+  --color-navy-950: #081327;  /* deep section bg — pushed noticeably darker than mist-50 */
+  --color-navy-900: #7FA8D4;
+  --color-navy-800: #5C8DBE;
+  --color-navy-700: #4879AC;
+
+  --color-surface: #1B2A45;   /* card background — pushed noticeably lighter than mist-50 */
+
+  --color-ember-100: #3A2412;
+  --color-ember-600: #FBAE6B;
+
+  color-scheme: dark;
 }
 
 @layer base {
@@ -64,3 +91,10 @@
     scroll-behavior: auto !important;
   }
 }
+
+.swiper {
+  --swiper-theme-color: var(--color-ember-500);
+  --swiper-pagination-bullet-inactive-color: var(--color-mist-200);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+}
+
