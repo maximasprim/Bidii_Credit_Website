@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import PageHero from "../components/ui/PageHero";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Enter your full name"),
@@ -16,6 +17,7 @@ const contactSchema = z.object({
 type ContactForm = z.infer<typeof contactSchema>;
 
 export default function Contact() {
+  usePageMeta("Contact Bidii Credit");
   const [submitted, setSubmitted] = useState(false);
   const {
     register,

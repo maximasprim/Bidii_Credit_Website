@@ -4,8 +4,10 @@ import { Plus, Search } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { faqs } from "../data/content";
 import { cn } from "../lib/utils";
+import { usePageMeta } from "../lib/usePageMeta";
 
 export default function Faq() {
+  usePageMeta("FAQs");
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<number | null>(0);
 

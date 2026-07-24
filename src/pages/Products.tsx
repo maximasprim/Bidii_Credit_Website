@@ -3,8 +3,10 @@ import { Check } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import CTABand from "../components/home/CTABand";
 import { loanProducts } from "../data/content";
+import { usePageMeta } from "../lib/usePageMeta";
 
 export default function Products() {
+  usePageMeta("Products - Bidii Credit");
   return (
     <>
       <PageHero

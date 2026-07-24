@@ -22,7 +22,7 @@ type ApplicationForm = z.infer<typeof applicationSchema>;
 const departments = ["All", ...Array.from(new Set(jobOpenings.map((j) => j.department)))];
 
 export default function Careers() {
-  usePageMeta("Careers");
+  usePageMeta("Careers at Bidii Credit");
   const [department, setDepartment] = useState("All");
   const [submitted, setSubmitted] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);

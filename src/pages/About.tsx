@@ -5,7 +5,7 @@ import { coreValues, timeline, leadership } from "../data/content";
 import { usePageMeta } from "../lib/usePageMeta";
 
 export default function About() {
-  usePageMeta("About Us");
+  usePageMeta("About Bidii Credit");
   return (
     <>
       <PageHero

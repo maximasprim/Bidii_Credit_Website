@@ -4,6 +4,7 @@ import { FileText, Search, Download } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import { downloads, type DownloadCategory } from "../data/content";
 import { cn } from "../lib/utils";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const categories: (DownloadCategory | "All")[] = [
   "All",
@@ -14,6 +15,7 @@ const categories: (DownloadCategory | "All")[] = [
 ];
 
 export default function Downloads() {
+  usePageMeta("Downloads");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<(typeof categories)[number]>("All");
 

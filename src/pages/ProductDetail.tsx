@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, FileText, ShieldQuestion } from "lucide-react";
 import { loanProducts } from "../data/content";
 import CTABand from "../components/home/CTABand";
+import { usePageMeta } from "../lib/usePageMeta";
 
 export default function ProductDetail() {
+  usePageMeta("Product Details - Bidii Credit");
   const { slug } = useParams();
   const product = loanProducts.find((p) => p.slug === slug);
 

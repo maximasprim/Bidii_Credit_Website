@@ -13,10 +13,12 @@ import {
 import PageHero from "../components/ui/PageHero";
 import CTABand from "../components/home/CTABand";
 import { services } from "../data/content";
+import { usePageMeta } from "../lib/usePageMeta";
 
 const icons = [FileCheck2, Lightbulb, PiggyBank, ShieldCheck, Smartphone, Laptop];
 
 export default function Services() {
+  usePageMeta("Services - Bidii Credit");
   return (
     <>
       <PageHero

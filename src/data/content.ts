@@ -1,5 +1,45 @@
 import Wandeto from "../assets/wandeto.jpg";
 
+export type RepaymentFrequency = "weekly" | "monthly";
+export type InterestBasis = "flat_over_term" | "per_month";
+
+export type LoanTier = {
+  id: string;
+  label: string;
+  minAmount: number;
+  maxAmount: number;
+  termUnit: "weeks" | "months";
+  minTerm: number;
+  maxTerm: number;
+  repaymentFrequency: RepaymentFrequency;
+  /** Decimal, e.g. 0.15 for 15% */
+  interestRate: number;
+  /**
+   * "flat_over_term": the rate applies once across the whole term, regardless of length
+   * (e.g. Hustle Yangu's "15%" over a fixed 4-week term).
+   * "per_month": the rate compounds per calendar month of the term (e.g. "12.5% per month").
+   * Weekly-repayment tiers convert weeks to months at 4 weeks = 1 month, matching how
+   * Bidii itself defines these tiers (e.g. "4-8 Weeks" for Hustle Yangu Plus).
+   */
+  interestBasis: InterestBasis;
+  /** Flat KES, one-time */
+  registrationFee: number;
+  /** Decimal, % of principal */
+  processingFeeRate: number;
+  /** Decimal, % of principal */
+  lifeInsuranceFeeRate: number;
+  /** Flat KES, secured products only (logbook, rental income) */
+  chattelFee?: number;
+  /** Flat KES, one-time (logbook only) */
+  inchargeFee?: number;
+  /** Flat KES per month, older-vehicle logbook tier only */
+  trackingFeePerMonth?: number;
+  /** Decimal, Kenyan excise duty applied to (processing fee + chattel fee), deducted upfront */
+  exciseDutyOnFeesRate?: number;
+  /** Number of guarantors required, or null when secured by collateral instead */
+  guarantors: number | null;
+};
+
 export type LoanProduct = {
   slug: string;
   name: string;
@@ -13,6 +53,14 @@ export type LoanProduct = {
   requirements: string[];
   process: string[];
   faqs: { q: string; a: string }[];
+  /** Real rate/fee tiers powering the Loan Calculator page. */
+  tiers: LoanTier[];
+  /**
+   * Check-off loans are underwritten by affordability (see the CW formula in
+   * calculator logic), not a fixed amount range — the calculator swaps in a
+   * salary-based flow for this product instead of a plain amount slider.
+   */
+  isAffordabilityBased?: boolean;
 };
 
 export const loanProducts: LoanProduct[] = [
@@ -31,10 +79,16 @@ export const loanProducts: LoanProduct[] = [
       "Flexible repayment terms tailored to your cash flow",
     ],
     eligibility: [
-      "Registered or licensed business",
-      "At least 6 months of verifiable business income",
+      "Kenyan citizen over 18 years old",
+      "Registered M-Pesa line",
+      "Good credit history",
+      "Provide 2 guarantors",
+      "Owned and operated a business for more than 6 months",
+      "Able to demonstrate ability to pay",
+      "Business and home appraisal",
     ],
     requirements: [
+      "Registration fee of KES 700 (legal and credit-worthiness check)",
       "6 months' business invoices as proof of income",
       "2 passport photos",
       "Latest utility bill (rent or electricity)",
@@ -48,6 +102,13 @@ export const loanProducts: LoanProduct[] = [
     faqs: [
       { q: "Do I need collateral for an SME loan?", a: "No - SME Loans are unsecured, so you can access funds without risking any business or personal assets." },
       { q: "How is the loan disbursed?", a: "Approved funds are sent directly to your M-Pesa account for convenience and security." },
+    ],
+    tiers: [
+      { id: "hustle-yangu", label: "Hustle Yangu", minAmount: 2000, maxAmount: 15000, termUnit: "weeks", minTerm: 1, maxTerm: 4, repaymentFrequency: "weekly", interestRate: 0.15, interestBasis: "flat_over_term", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, exciseDutyOnFeesRate: 0.20, guarantors: 2 },
+      { id: "hustle-yangu-plus", label: "Hustle Yangu Plus", minAmount: 16000, maxAmount: 30000, termUnit: "weeks", minTerm: 4, maxTerm: 8, repaymentFrequency: "weekly", interestRate: 0.15, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, exciseDutyOnFeesRate: 0.20, guarantors: 2 },
+      { id: "jikuze", label: "Jikuze", minAmount: 32000, maxAmount: 70000, termUnit: "weeks", minTerm: 4, maxTerm: 12, repaymentFrequency: "weekly", interestRate: 0.125, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, exciseDutyOnFeesRate: 0.20, guarantors: 2 },
+      { id: "jikuze-plus", label: "Jikuze Plus", minAmount: 80000, maxAmount: 100000, termUnit: "weeks", minTerm: 4, maxTerm: 24, repaymentFrequency: "weekly", interestRate: 0.125, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, exciseDutyOnFeesRate: 0.20, guarantors: 2 },
+      { id: "jikuze-monthly", label: "Jikuze Monthly", minAmount: 80000, maxAmount: 100000, termUnit: "months", minTerm: 1, maxTerm: 6, repaymentFrequency: "monthly", interestRate: 0.125, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, exciseDutyOnFeesRate: 0.20, guarantors: 2 },
     ],
   },
   {
@@ -65,12 +126,16 @@ export const loanProducts: LoanProduct[] = [
       "Funds sent instantly via M-Pesa",
     ],
     eligibility: [
-      "Kenyan resident with a valid national ID",
-      "Active M-Pesa account",
+      "Kenyan citizen over 18 years old",
+      "Registered M-Pesa line",
+      "Good credit history",
+      "Able to demonstrate ability to pay",
+      "No guarantors or business appraisal required",
     ],
     requirements: [
       "Download the Bidii Credit App (available on the Play Store)",
       "Valid national ID for sign-up",
+      "Registered M-Pesa account",
     ],
     process: [
       "Download the Bidii Credit App from the Play Store",
@@ -81,6 +146,10 @@ export const loanProducts: LoanProduct[] = [
     faqs: [
       { q: "Do I need to visit a branch for a mobile loan?", a: "No - the entire process, from application to disbursement, happens on the Bidii Credit App." },
       { q: "How fast is approval?", a: "Approval is instant, making mobile loans ideal for emergencies such as school fees or urgent bills." },
+    ],
+    tiers: [
+      { id: "weekly", label: "Weekly Plan", minAmount: 500, maxAmount: 50000, termUnit: "weeks", minTerm: 1, maxTerm: 4, repaymentFrequency: "weekly", interestRate: 0.15, interestBasis: "flat_over_term", registrationFee: 100, processingFeeRate: 0, lifeInsuranceFeeRate: 0.01, guarantors: null },
+      { id: "monthly", label: "Monthly Plan", minAmount: 500, maxAmount: 50000, termUnit: "months", minTerm: 1, maxTerm: 1, repaymentFrequency: "monthly", interestRate: 0.15, interestBasis: "flat_over_term", registrationFee: 100, processingFeeRate: 0, lifeInsuranceFeeRate: 0.01, guarantors: null },
     ],
   },
   {
@@ -98,17 +167,23 @@ export const loanProducts: LoanProduct[] = [
       "Quick processing, with funds available in hours",
     ],
     eligibility: [
-      "Business owners registered or licensed for 1+ years, or",
-      "Salaried employees employed for 1+ years",
+      "Vehicle must be roadworthy",
+      "Vehicle must not be older than 25 years",
+      "Heavy commercial and earth-moving vehicles (tractors, forklifts, backhoes, excavators) are not accepted as security",
+      "Business owners registered or licensed for 1+ years, or salaried employees employed for 1+ years",
     ],
     requirements: [
-      "6 months' payslips and employment contract, or 6 months' business invoices",
-      "Original logbook (in your name or your guarantor's name)",
-      "Valid comprehensive insurance",
-      "Motor vehicle valuation report",
-      "2 passport photos",
-      "6 months' bank statements",
-      "Signed post-dated cheques",
+      "ID and PIN copies (original ID for verification)",
+      "6 months' bank and M-Pesa statements",
+      "Original logbook",
+      "2 recent colored passport photos",
+      "Postdated cheques",
+      "Copy of next of kin's ID",
+      "Insurance note",
+      "Valuation report",
+      "Engine tape lift (loans KES 300,000 and above)",
+      "Advance tax certificate (commercial vehicles only)",
+      "Inspection report",
     ],
     process: [
       "Call 0709 840 000 to start your application",
@@ -120,6 +195,10 @@ export const loanProducts: LoanProduct[] = [
     faqs: [
       { q: "Will I lose access to my car during the loan?", a: "No - you keep full use of your vehicle. Only the logbook is held as security until the loan is settled." },
       { q: "Are there any extra charges?", a: "Legal and valuation charges apply, and these are communicated upfront with no hidden fees." },
+    ],
+    tiers: [
+      { id: "standard", label: "Auto Loan", minAmount: 50000, maxAmount: 5000000, termUnit: "months", minTerm: 3, maxTerm: 24, repaymentFrequency: "monthly", interestRate: 0.05, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, chattelFee: 3500, inchargeFee: 1500, exciseDutyOnFeesRate: 0.20, guarantors: null },
+      { id: "jikuze-auto", label: "Jikuze Auto (vehicles 21-25 yrs)", minAmount: 50000, maxAmount: 150000, termUnit: "months", minTerm: 3, maxTerm: 9, repaymentFrequency: "monthly", interestRate: 0.075, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, chattelFee: 3500, trackingFeePerMonth: 1500, exciseDutyOnFeesRate: 0.20, guarantors: null },
     ],
   },
   {
@@ -138,14 +217,22 @@ export const loanProducts: LoanProduct[] = [
     ],
     eligibility: [
       "Kenyan citizen aged 18 and above",
-      "Proof of rental property ownership",
-      "6 months of consistent rental income via bank or M-Pesa statements",
-      "Property agent managing rentals for 6+ months",
+      "Proof of rental property ownership via title deed",
+      "Regular rental income",
+      "Rent collected by an agent on Bidii Credit's approved panel or with a signed MOU, for at least 6 months",
       "Property located within Bidii Credit's area of operation",
     ],
     requirements: [
-      "Proof of rental property ownership",
-      "6 months' rental income statements (bank or M-Pesa)",
+      "ID and PIN copies (original ID for verification)",
+      "For companies: Certificate of Registration and signed Memorandum & Articles of Association",
+      "6 months' bank and M-Pesa statements",
+      "3-month agent collection sheet",
+      "Most recent electricity or water bill",
+      "Original title deed as security",
+      "Credit history report",
+      "Duly signed Deed of Rental Assignment",
+      "Tripartite agreement between Bidii Credit, borrower, and rent collection agent, covering the loan period",
+      "Letter of offer",
     ],
     process: [
       "Call 0709 840 000 to start your application",
@@ -155,6 +242,9 @@ export const loanProducts: LoanProduct[] = [
     faqs: [
       { q: "What can I use a rental income loan for?", a: "Common uses include property repairs, renovations to boost rental value, and covering unexpected expenses." },
       { q: "Does my property need to be in a specific area?", a: "Yes - the property must be within Bidii Credit's area of operation, where a branch is present." },
+    ],
+    tiers: [
+      { id: "standard", label: "Rental Income Loan", minAmount: 300000, maxAmount: 5000000, termUnit: "months", minTerm: 1, maxTerm: 12, repaymentFrequency: "monthly", interestRate: 0.05, interestBasis: "per_month", registrationFee: 700, processingFeeRate: 0.04, lifeInsuranceFeeRate: 0.01, chattelFee: 3500, exciseDutyOnFeesRate: 0.20, guarantors: null },
     ],
   },
   {
@@ -172,11 +262,21 @@ export const loanProducts: LoanProduct[] = [
       "Flexible repayment terms from 3 to 120 months",
     ],
     eligibility: [
-      "Government employees, including teachers, nurses, and NYS staff",
+      "Employed for at least 3 months",
+      "Bidii Credit must have an active MOU with the employer",
+      "Aged 18 to 59 years",
+      "Must be a Kenyan citizen",
+      "Excludes: self-employed, unemployed, commission earners, temporary employees, groups/businesses, anyone with a pending disciplinary issue or suspension, those retiring before the loan term ends, private-company employees without an MOU, insolvent persons, and pensioners",
     ],
     requirements: [
-      "Valid national ID",
-      "Proof of government employment",
+      "3 latest pay slips",
+      "Scanned copy of original ID",
+      "Latest clear colored passport photo",
+      "Duly filled loan application form",
+      "Datasheet/capture sheet confirming the deduction booking",
+      "Letter of appointment or Job ID (ministries only)",
+      "3 months' salary account statement or 6 months' M-Pesa statement",
+      "Payslip login details (TSC and GHRIS clients)",
     ],
     process: [
       "Call 0709 840 000 to start your application",
@@ -187,6 +287,10 @@ export const loanProducts: LoanProduct[] = [
     faqs: [
       { q: "Who qualifies for a check off loan?", a: "Government employees such as teachers, nurses, and NYS staff, whose repayments can be deducted directly from salary." },
       { q: "How long can I take to repay?", a: "Repayment terms are flexible, ranging from 3 to 120 months depending on the loan amount." },
+    ],
+    isAffordabilityBased: true,
+    tiers: [
+      { id: "standard", label: "Check Off Loan", minAmount: 10000, maxAmount: 3000000, termUnit: "months", minTerm: 3, maxTerm: 120, repaymentFrequency: "monthly", interestRate: 0.02, interestBasis: "per_month", registrationFee: 1000, processingFeeRate: 0, lifeInsuranceFeeRate: 0, guarantors: null },
     ],
   },
 ];
