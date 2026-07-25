@@ -48,7 +48,7 @@ export default function Contact() {
               <p className="mt-3 font-display text-sm font-bold" style={{ color: "var(--color-navy-900)" }}>
                 Call us
               </p>
-              <p className="mt-1 text-sm text-ink-500">+254 700 000 000</p>
+              <p className="mt-1 text-sm text-ink-500">+254 709 840 000</p>
               <p className="text-xs text-ink-500">Mon–Fri 8:00–17:00, Sat 9:00–13:00</p>
             </div>
             <div className="rounded-2xl border border-mist-200 p-6">
@@ -56,14 +56,14 @@ export default function Contact() {
               <p className="mt-3 font-display text-sm font-bold" style={{ color: "var(--color-navy-900)" }}>
                 Email us
               </p>
-              <p className="mt-1 text-sm text-ink-500">hello@bidiicreditkenya.co.ke</p>
+              <p className="mt-1 text-sm text-ink-500">info@bidiicreditkenya.co.ke</p>
             </div>
             <div className="rounded-2xl border border-mist-200 p-6">
               <MapPin size={18} style={{ color: "var(--color-navy-900)" }} />
               <p className="mt-3 font-display text-sm font-bold" style={{ color: "var(--color-navy-900)" }}>
-                Head office
+                Head Office
               </p>
-              <p className="mt-1 text-sm text-ink-500">Bidii House, Moi Avenue, Nairobi</p>
+              <p className="mt-1 text-sm text-ink-500">Applewood Adams, Ngong Road, Nairobi</p>
             </div>
           </div>
 

@@ -304,22 +304,22 @@ export const stats = [
 
 export const testimonials = [
   {
-    name: "Grace Wanjiru",
-    role: "Owner, Wanjiru Fresh Produce, Kiambu",
+    name: "Amina Mohamed",
+    role: "Landlord, Mombasa",
     quote:
-      "The loan let me buy a second delivery motorbike. My supply runs doubled and my customers stopped waiting.",
+      "When my apartment roof collapsed, Bidii’s rental income loan funded repairs in 48 hours. Tenants stayed, and my income doubled with new units!",
   },
   {
-    name: "Samuel Otieno",
-    role: "Boda Boda Operator, Kisumu",
+    name: "Wanjiku Mwangi",
+    role: "Retailer, Thika",
     quote:
-      "I financed my bike through the logbook option on an asset I didn't even own yet. Repayments match what I earn per week.",
+      "No collateral, just my log book. Bidii’s Ksh 150,000 loan stocked my shelves before Christmas—sales tripled! I now employ 3 staff.",
   },
   {
-    name: "Fatuma Abdi",
-    role: "Retail Shop Owner, Eastleigh",
+    name: "Otieno Baraka",
+    role: "Driver, Nairobi",
     quote:
-      "Every other lender wanted collateral I didn't have. Bidii looked at my stock turnover instead and approved me in a day.",
+      "Used my car logbook to secure emergency funds for my son’s surgery. Still drove to work while repaying. Bidii understood family comes first.",
   },
 ];
 
@@ -349,7 +349,7 @@ export const faqs = [
   },
   {
     q: "Is Bidii Credit licensed?",
-    a: "Yes. Bidii Credit is a licensed and regulated microfinance institution operating under Kenyan financial regulations, with published rates and no hidden charges.",
+    a: "Yes. Bidii Credit is a licensed and regulated microfinance institution operating under CBK financial regulations, with published rates and no hidden charges.",
   },
   {
     q: "Can I repay early without penalties?",
@@ -359,13 +359,41 @@ export const faqs = [
     q: "What documents do I need to apply?",
     a: "A national ID, KRA PIN, and 3-6 months of M-Pesa or bank statements cover most applications. Business loans additionally require a business permit or registration certificate.",
   },
+  {
+    q: "How do I make a payment?",
+    a: "You can make payments through M-Pesa, bank transfer, or at any Bidii Credit branch. Payment reminders are sent via SMS."
+  },
+  {
+    q: "Will late repayment affect my CRB status?",
+    a: "Yes. Always pay on time to avoid negative score. We report to CRB monthly."
+  }
 ];
 
 export const applicationSteps = [
-  { step: 1, title: "Check eligibility", detail: "Answer five quick questions to see an instant indication of what you may qualify for." },
-  { step: 2, title: "Submit application", detail: "Upload your ID, KRA PIN and statements. Most applicants finish in under 6 minutes." },
-  { step: 3, title: "Verification call", detail: "A loan officer confirms your details, usually the same day you apply." },
-  { step: 4, title: "Funds disbursed", detail: "Approved funds land in your M-Pesa or bank account, with your repayment schedule attached." },
+  {
+    step: 1,
+    title: "Choose Your Loan",
+    detail:
+      "Select the loan product that best fits your needs, including SME, Mobile, Logbook, Rental Income, or Check-Off loans."
+  },
+  {
+    step: 2,
+    title: "Submit Your Application",
+    detail:
+      "Apply online, call us, or visit a Bidii Credit branch and provide the required personal, income, and supporting documents."
+  },
+  {
+    step: 3,
+    title: "Verification & Approval",
+    detail:
+      "Our team reviews your application, verifies your information and supporting documents, and completes the approval process within 6 hours."
+  },
+  {
+    step: 4,
+    title: "Receive Your Funds",
+    detail:
+      "Once approved, your loan is disbursed through M-Pesa or a bank account, depending on the loan product and agreed terms."
+  }
 ];
 
 export const coreValues = [
@@ -548,7 +576,7 @@ export const downloads: DownloadItem[] = [
   { title: "Business Loan Application Form", category: "Application Forms", fileType: "PDF", size: "240 KB", description: "The standard form for business loan applications, including the required guarantor section." },
   { title: "Asset Finance Application Form", category: "Application Forms", fileType: "PDF", size: "265 KB", description: "Application form for financing motorbikes, machinery, and commercial equipment." },
   { title: "SME Loan Application Pack", category: "Application Forms", fileType: "DOCX", size: "310 KB", description: "Full documentation pack for registered SME facilities, including financial statement templates." },
-  { title: "Salary Advance Consent Form", category: "Application Forms", fileType: "PDF", size: "120 KB", description: "Payroll verification consent required for salary advance applications." },
+  // { title: "Salary Advance Consent Form", category: "Application Forms", fileType: "PDF", size: "120 KB", description: "Payroll verification consent required for salary advance applications." },
   { title: "Business Loans Brochure", category: "Product Brochures", fileType: "PDF", size: "1.1 MB", description: "Rates, terms, and eligibility overview for the Business Loans product." },
   { title: "Asset Finance Brochure", category: "Product Brochures", fileType: "PDF", size: "980 KB", description: "How asset financing works, from valuation to ownership transfer." },
   { title: "Logbook Loans Brochure", category: "Product Brochures", fileType: "PDF", size: "890 KB", description: "Overview of logbook loan terms, valuation process, and top-up eligibility." },
@@ -556,7 +584,7 @@ export const downloads: DownloadItem[] = [
   { title: "First-Time Borrower's Guide", category: "Statements & Guides", fileType: "PDF", size: "620 KB", description: "A short guide to preparing documents and understanding your offer before you apply." },
   { title: "Terms and Conditions", category: "Legal & Compliance", fileType: "PDF", size: "410 KB", description: "Standard terms and conditions governing all Bidii Credit loan products." },
   { title: "Data Privacy Policy", category: "Legal & Compliance", fileType: "PDF", size: "280 KB", description: "How customer data is collected, used, and protected." },
-  { title: "Complaints Handling Procedure", category: "Legal & Compliance", fileType: "PDF", size: "195 KB", description: "How to raise a complaint and what response times to expect." },
+  // { title: "Complaints Handling Procedure", category: "Legal & Compliance", fileType: "PDF", size: "195 KB", description: "How to raise a complaint and what response times to expect." },
 ];
 
 export type JobOpening = {
@@ -611,9 +639,33 @@ export const jobOpenings: JobOpening[] = [
   },
 ];
 
+// export const benefits = [
+//   { title: "Medical cover", detail: "Comprehensive inpatient and outpatient cover for you and your dependents." },
+//   { title: "Performance bonus", detail: "Annual bonus tied to individual and branch performance." },
+//   { title: "Learning budget", detail: "Annual allowance for courses, certifications, and professional memberships." },
+//   { title: "Staff loan rates", detail: "Preferential rates on Bidii Credit products for all staff." },
+// ];
+
 export const benefits = [
-  { title: "Medical cover", detail: "Comprehensive inpatient and outpatient cover for you and your dependents." },
-  { title: "Performance bonus", detail: "Annual bonus tied to individual and branch performance." },
-  { title: "Learning budget", detail: "Annual allowance for courses, certifications, and professional memberships." },
-  { title: "Staff loan rates", detail: "Preferential rates on Bidii Credit products for all staff." },
+  {
+    title: "Purpose-Driven Work",
+    detail:
+      "Make a meaningful impact by supporting Kenyan businesses, individuals, farmers, and communities to achieve their financial goals."
+  },
+  {
+    title: "Learning & Development",
+    detail:
+      "Access training, mentorship, and continuous learning opportunities designed to strengthen your skills and support your professional growth."
+  },
+  {
+    title: "Career Growth",
+    detail:
+      "Build a rewarding career with opportunities for professional development, increased responsibility, and long-term advancement."
+  },
+  {
+    title: "Collaborative Culture",
+    detail:
+      "Work alongside passionate professionals in an inclusive environment that values teamwork, diversity, innovation, and shared success."
+  },
+
 ];
