@@ -6,18 +6,11 @@ import heroBackground from "../../../public/Hero_Bg.jpg";
 
 export default function Hero() {
   return (
-    // <section
-    //   className="relative overflow-hidden pb-24 pt-16 lg:pb-32 lg:pt-20"
-    //   style={{
-    //     background:
-    //       "radial-gradient(ellipse 90% 60% at 20% 0%, var(--color-navy-700) 0%, var(--color-navy-900) 45%, var(--color-navy-950) 100%)",
-    //   }}
-    // >
     <section
       className="relative overflow-hidden bg-top bg-no-repeat bg-cover bg-center sm:bg-center pb-24 pt-16 lg:pb-32 lg:pt-20"
       style={{
         backgroundImage: `url(${heroBackground})`,
-        // backgroundColor: "var(--color-navy-900)",
+        backgroundColor: "var(--color-navy-900)",
       }}
     >
       {/* Dark gradient overlay */}
@@ -108,7 +101,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           className="relative mx-auto w-full max-w-sm"
         >
-          <div className="rounded-3xl bg-white p-6 shadow-2xl shadow-black/30">
+          <div className="rounded-3xl bg-white/90 p-6 shadow-2xl shadow-black/30">
             <p className="text-xs font-medium uppercase tracking-wide text-ink-500">Sample business loan</p>
             <p className="mt-2 font-display text-3xl font-extrabold tabular" style={{ color: "var(--color-navy-900)" }}>
               KES 150,000

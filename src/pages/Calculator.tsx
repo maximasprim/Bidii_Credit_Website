@@ -178,8 +178,8 @@ export default function Calculator() {
         description="Choose a product and plan, set your amount and term, and get a month-by-month or week-by-week breakdown you can download before you apply."
       />
 
-      <section className="mx-auto max-w-6xl px-5 py-16 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="mx-auto max-w-6xl px-5 py-16 lg:px-8 lg:py-20 ">
+        <div className="grid gap-10 grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -388,7 +388,7 @@ export default function Calculator() {
 
             <button
               onClick={downloadCsv}
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+              className="mt-6 flex w-full px-4 sm:px-4 items-center justify-center gap-2 sm:gap-1 md:gap-3 lg:gap-4 rounded-full py-2 md:py-3 lg:py-4 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-navy-900)" }}
             >
               <Download size={16} />
